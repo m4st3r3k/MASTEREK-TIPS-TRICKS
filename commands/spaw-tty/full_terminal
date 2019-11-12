@@ -1,0 +1,5 @@
+python -c 'import pty;pty.span("/bin/bash")'
+CTRL + Z
+stty raw -echo
+fg
+bash-3.4$ export TERM=xterm
