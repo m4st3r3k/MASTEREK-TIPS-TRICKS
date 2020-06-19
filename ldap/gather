@@ -1,0 +1,6 @@
+nmap --script ldap-brute -p 389 <IP/HOST>
+
+Null credentials: 
+ldapsearch -x -h <IP> -D '' -w '' -b "DC=foo,DC=bar"
+
+ 
