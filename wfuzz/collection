@@ -1,0 +1,11 @@
+Common directories:
+wfuzz -w wordlist/general/common.txt http://testphp.vulnweb.com/FUZZ
+
+Common files:
+wfuzz -w wordlist/general/common.txt http://testphp.vulnweb.com/FUZZ.php
+
+Fuzzing parameters in urls:
+wfuzz -z range,0-10 --hl 97 http://testphp.vulnweb.com/listproducts.php?cat=FUZZ
+
+Fuzzing post request:
+wfuzz -z file,wordlist/others/common_pass.txt -d "uname=FUZZ&pass=FUZZ"  --hc 302 http://testphp.vulnweb.com/userinfo.php
