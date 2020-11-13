@@ -1,0 +1,2 @@
+#Discover subdomains
+amass enum -ip -d danielmiessler.com
