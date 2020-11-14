@@ -1,2 +1,7 @@
-#Discover subdomains
-amass enum -ip -d danielmiessler.com
+#Simple discover subdomains
+amass enum -ip -d domain.com
+
+#Discover subdomains with brute force
+amass enum -ip -src -brute -d domain.com
+
+
