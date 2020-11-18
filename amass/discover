@@ -4,4 +4,9 @@ amass enum -ip -d domain.com
 #Discover subdomains with brute force
 amass enum -ip -src -brute -d domain.com
 
+#Passive enumeration on a domain
+amass enum -passive -d <domain> -o <output>
+
+
+
 
