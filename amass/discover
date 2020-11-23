@@ -5,7 +5,10 @@ amass enum -ip -d domain.com
 amass enum -ip -src -brute -d domain.com
 
 #Passive enumeration on a domain
-amass enum -passive -d <domain> -o <output>
+amass enum -passive -d domain.com -o output.txt
+
+#Obtain intelligence and parent domains owned by the organization
+amass intel -d domain.com -whois
 
 
 
