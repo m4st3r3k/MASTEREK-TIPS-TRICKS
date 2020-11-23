@@ -1,7 +1,7 @@
-#Simple discover subdomains
+#Simple subdomain discover
 amass enum -ip -d domain.com
 
-#Discover subdomains with brute force
+#Subdomain discorver with brute force
 amass enum -ip -src -brute -d domain.com
 
 #Passive enumeration on a domain
@@ -9,6 +9,9 @@ amass enum -passive -d domain.com -o output.txt
 
 #Obtain intelligence and parent domains owned by the organization
 amass intel -d domain.com -whois
+
+#Advanced subdomain discover (active + brute + recursive + ports)
+amass enum -active -brute -min-for-recursive 3 -d telefonica.com.br -p 80,443,8080 -o output.txt
 
 
 
