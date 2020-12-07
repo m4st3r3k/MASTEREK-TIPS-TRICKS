@@ -1,9 +1,16 @@
 nmap --script ldap-brute -p 389 <IP/HOST>
 
-Null credentials: 
+[Null credentials] 
 ldapsearch -x -h <IP> -D '' -w '' -b "DC=foo,DC=bar"
+ldapsearch -x -b "dc=domain,dc=local" "*" -h 0.0.0.0 
 
-Anonymous/Credentialed LDAP data dump
+[Anonymous/Credentialed LDAP data dump]
 ldapsearch -LLL -x -H ldap://<domain fqdn> -b ‘’ -s base ‘(objectclass=*)’
 
- 
+[Unauthenticated Bind Enumeration (DN with no password)]
+ldapsearch -x -D "cn=admin,dc=domain,dc=local" -s sub "cn=*" -h 0.0.0.0
+
+[Authenticated Bind Enumeration]
+ldapwhoami -h ldap.domain.local -w "password"
+
+
