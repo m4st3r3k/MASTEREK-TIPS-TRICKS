@@ -1,0 +1,11 @@
+#List containers
+buildah containers
+
+#Create image from buildah
+buildah from --pull-never httpd:alpine
+
+#Copy file into container
+buildah copy container_name source_file dest_file
+
+#Confirm the creation of the container
+buildah commit container_name custom_name
