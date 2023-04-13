@@ -1,3 +1,5 @@
+##########[BUILDAH IMAGE}##########
+
 #List containers
 buildah containers
 
@@ -9,3 +11,5 @@ buildah copy container_name source_file dest_file
 
 #Confirm the creation of the container
 buildah commit container_name custom_name
+
+##########[END]##########
