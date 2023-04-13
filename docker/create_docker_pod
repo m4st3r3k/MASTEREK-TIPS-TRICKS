@@ -1,0 +1,23 @@
+-it = interactive shell (same to --interactive --tty)
+--rm = exclude container after exit
+-d = detashe
+-p = publish port to container
+
+#Create docker centos
+docker run -it --rm centos:5 bash
+
+#Create docker http using local port to docker port
+docker container run -d --rm -p 8080:80 httpd
+
+#Create docker http mapping webroot to docker using local port -> docker
+docker container run -d --rm -p 8080:80 -v /home/masterek/webroot/:/usr/local/apache2/htdocs/ httpd
+
+#Create docker mapping local folder to docker
+docker run -v /home/masterek/files/:/home -it --rm centos:5  bash
+
+
+#Create pod named offsec
+podman pod create --name masterek
+
+#Add container http do pod masterek
+podman run -d --pod masterek httpd
