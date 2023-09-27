@@ -1,5 +1,8 @@
 1 - Capture 4-handshake like  WPA-PSK and capture PKMID
 2- Extract certificate
+3 - Install freeradius
+4 - Config freeradius
+5 - Regenerate Diffie-Hellman 
 
 [+] Use one of the filters to find them: tls.handshake.type == 11 , or tls.handshake.certificate
 
@@ -18,4 +21,9 @@ NOTE: If you want to use it in PEM format: root@host: openssl x509 -inform der -
 [+] Follow the steps below to regenerate the Diffie-Hellman (DH) parameters and create the certificates
 NOTE: Do this in the /etc/freeradius/3.0/certs directory
 
+root@kali: /etc/freeradius/3.0/certs# rm dh
 root@host: /etc/freeradius/3.0/certs# make
+root@host: /etc/freeradius/3.0/certs# chmod g+r server.key
+root@host: /etc/freeradius/3.0/certs# openssl req -new -x509 -keyout ca.key -out ca.pem \
+        -days '60' -config ./ca.cnf \
+        -passin pass:'whatever' -passout pass:'whatever'
