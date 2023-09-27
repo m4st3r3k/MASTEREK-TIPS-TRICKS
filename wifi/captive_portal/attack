@@ -3,6 +3,9 @@ Attack captive portal
 - capture target handshake
 - Build captive portal
 - Config network (ip, dns)
+- Create DNS Spoofing
+- Up Config
+- Check syslog and netstat
 
 
 sudo apt install apache2 libapache2-mod-php
@@ -11,3 +14,6 @@ sudo ip addr add 192.168.87.1/24 dev wlan0
 sudo ip link set wlan0 up
 sudo apt install dnsmasq
 touch dnsmasq.conf
+sudo dnsmasq --conf-file=dnsmasq.conf
+sudo tail /var/log/syslog | grep dnsmasq
+sudo netstat -lnp
