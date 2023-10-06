@@ -3,6 +3,8 @@
 3 - Install freeradius
 4 - Config freeradius
 5 - Regenerate Diffie-Hellman 
+6 - Install hostapd-mana
+7 - Config hostapd-mana
 
 [+] Use one of the filters to find them: tls.handshake.type == 11 , or tls.handshake.certificate
 
@@ -23,7 +25,5 @@ NOTE: Do this in the /etc/freeradius/3.0/certs directory
 
 root@kali: /etc/freeradius/3.0/certs# rm dh
 root@host: /etc/freeradius/3.0/certs# make
-root@host: /etc/freeradius/3.0/certs# chmod g+r server.key
-root@host: /etc/freeradius/3.0/certs# openssl req -new -x509 -keyout ca.key -out ca.pem \
-        -days '60' -config ./ca.cnf \
-        -passin pass:'whatever' -passout pass:'whatever'
+root@host: /etc/freeradius/3.0/certs# apt-get install hostapd-mana
+root@host: vi /etc/hostapd-mana/mana.conf 
