@@ -1,0 +1,17 @@
+*     PEAP,TTLS,TLS,FAST
+"t"   TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP,MSCHAPV2,MD5,GTC,TTLS,TTLS-MSCHAPV2    "pass"   [2]
+
+
+
+
+
+
+
+#################################################################################################################################################
+This format of the hostapd.eap_user10 file is as follows.
+
+The first column indicates a specific user by username or, in the event of wildcard character (*), any user. It can contain a domain name as well.
+The second column contains the protocols allowed for the specific users and authentication phase.
+The third one is optional and is used for the password when a specific user is mentioned.
+The fourth one, indicated here with [2], indicates that the settings on this line are for phase 2 authentication.
+###################################################################################################################################################
