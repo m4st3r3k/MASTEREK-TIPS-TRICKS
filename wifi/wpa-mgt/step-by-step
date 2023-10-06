@@ -5,7 +5,8 @@
 5 - Regenerate Diffie-Hellman 
 6 - Install hostapd-mana
 7 - Config hostapd-mana
-8 - Create eap
+8 - Create eap  EAP user file
+9 - Start hostapd-mana
 
 [+] Use one of the filters to find them: tls.handshake.type == 11 , or tls.handshake.certificate
 
@@ -29,6 +30,6 @@ root@host: /etc/freeradius/3.0/certs# make
 root@host: /etc/freeradius/3.0/certs# apt-get install hostapd-mana
 root@host: vi /etc/hostapd-mana/mana.conf 
 root@host: vi /etc/hostapd-mana/mana.eap_user
+root@host: hostapd-mana /etc/hostapd-mana/mana.conf
 
 
-/etc/hostapd-mana/mana.eap_user
