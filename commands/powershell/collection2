@@ -1,0 +1,7 @@
+Get-ExecutionPolicy
+
+Set-ExecutionPolicy -Scope CurrentUser 0
+
+Set-ExecutionPolicy Unrestricted
+
+[appdomain]::currentdomain.getassemblies() | Sort-Object -Property fullname | Format-Table fullname
