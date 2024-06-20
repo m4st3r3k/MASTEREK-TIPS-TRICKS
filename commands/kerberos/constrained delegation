@@ -1,0 +1,4 @@
+[ENUM]
+
+Using PowerView:
+PS C:\tools> Get-DomainUser -TrustedToAuth
